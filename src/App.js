@@ -3,9 +3,10 @@ import Movies from "./components/movies";
 import Customers from "./components/customers";
 import Rentals from "./components/rentals";
 import NotFound from "./components/not-found";
-import "./App.css";
+import MovieDetails from "./components/moviedetail";
 import NavBar from "./components/common/navbar";
 import { Route, Routes } from "react-router-dom";
+import "./App.css";
 
 class App extends Component {
   render() {
@@ -13,7 +14,10 @@ class App extends Component {
       <main className="container">
         <NavBar />
         <Routes>
-          <Route path="/movies" element={<Movies />} />
+          <Route path="/movies">
+            <Route path=":id" element={<MovieDetails />} />
+            <Route path="" element={<Movies />} />
+          </Route>
           <Route path="/customers" element={<Customers />} />
           <Route path="/rentals" element={<Rentals />} />
           <Route path="/" exact element={<Movies />} />
