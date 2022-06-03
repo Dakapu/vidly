@@ -72,7 +72,9 @@ class LoginForm extends Component {
             error={errors.password}
           />
 
-          <button className="btn btn-primary">Login</button>
+          <button disabled={this.validate()} className="btn btn-primary">
+            Login
+          </button>
         </form>
       </React.Fragment>
     );
