@@ -67,6 +67,32 @@ class Form extends Component {
       />
     );
   }
+
+  renderDropDown(name, label, items) {
+    const { data, errors } = this.state;
+
+    return (
+      <select
+        defaultValue={"DEFAULT"}
+        className="custom-select"
+        id="inputGroupSelect"
+      >
+        <option value={"DEFAULT"} disabled>
+          Choose...
+        </option>
+        {items.map((i) => (
+          <option
+            onChange={this.handleChange}
+            error={errors[name]}
+            key={i._id}
+            value={data[i.name]}
+          >
+            {i.name}
+          </option>
+        ))}
+      </select>
+    );
+  }
 }
 
 export default Form;
