@@ -12,6 +12,7 @@ class Form extends Component {
 
     const errors = {};
     for (let item of error.details) errors[item.path[0]] = item.message;
+    console.log("Errors in validate(): ", errors);
     return errors;
   };
 
@@ -82,8 +83,8 @@ class Form extends Component {
         </option>
         {items.map((i) => (
           <option
-            onChange={this.handleChange}
             error={errors[name]}
+            onChange={this.handleChange}
             key={i._id}
             value={data[i.name]}
           >

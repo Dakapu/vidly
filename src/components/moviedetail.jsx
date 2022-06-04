@@ -6,17 +6,13 @@ import { getGenres } from "../services/fakeGenreService";
 
 class MovieDetails extends Form {
   state = {
-    data: { title: "", genres: [...getGenres()], inStock: "", rate: "" },
+    data: { title: "", genres: getGenres(), inStock: "", rate: "" },
     errors: {},
   };
 
-  componentDidMount() {
-    console.log("genres: ", this.state.data.genres);
-  }
-
   schema = {
     title: Joi.string().required().label("Title"),
-    genre: Joi.string().required().label("Genre"),
+    genres: Joi.required().label("Genres"),
     inStock: Joi.number().required().min(0).max(100).label("Number in Stock"),
     rate: Joi.number().required().min(0).max(10).label("Daily rental rate"),
   };
@@ -37,7 +33,7 @@ class MovieDetails extends Form {
 
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("title", "Title")}
-          {this.renderDropDown("name", "Genre", this.state.data.genres)}
+          {this.renderDropDown("genre", "Genre", this.state.data.genres)}
           {this.renderInput("inStock", "Number in Stock", "number")}
           {this.renderInput("rate", "Daily Rental Rate", "number")}
           {this.renderButton("Save")}
