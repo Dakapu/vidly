@@ -4,7 +4,7 @@ import Movies from "./components/movies";
 import Customers from "./components/customers";
 import Rentals from "./components/rentals";
 import NotFound from "./components/not-found";
-import MovieDetails from "./components/moviedetail";
+import MovieForm from "./components/movieForm";
 import NavBar from "./components/common/navbar";
 import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/registerForm";
@@ -19,8 +19,8 @@ class App extends Component {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/movies">
-            <Route path=":id" element={<MovieDetails />} />
-            <Route path=":new" element={<MovieDetails />} />
+            <Route path=":id" element={<MovieForm />} />
+            <Route path=":new" element={<MovieForm />} />
             <Route path="" element={<Movies />} />
           </Route>
           <Route path="/customers" element={<Customers />} />
