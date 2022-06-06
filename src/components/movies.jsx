@@ -6,6 +6,7 @@ import Pagination from "./common/pagination";
 import { getMovies, deleteMovie } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
 import { paginate } from "../utils/paginate";
+import SearchBox from "./searchBox";
 import _ from "lodash";
 
 class Movies extends Component {
