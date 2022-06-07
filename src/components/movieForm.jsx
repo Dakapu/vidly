@@ -3,8 +3,11 @@ import Joi from "joi-browser";
 import Form from "./common/form";
 import { getMovie, saveMovie } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
+import { useParams } from "react-router-dom";
 
 class MovieForm extends Form {
+  //Does not work due to breaking changes in React v16 due to hook calls
+  params = useParams();
   state = {
     data: {
       title: "",
@@ -36,6 +39,7 @@ class MovieForm extends Form {
     const genres = getGenres();
     this.setState({ genres });
 
+    //Does not work due to breaking changes in React v16 due to hook calls
     const movieId = this.props.match.params.id;
     if (movieId === "new") return;
 

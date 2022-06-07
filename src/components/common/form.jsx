@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
 import Input from "./input";
+import Select from "./select";
 
 class Form extends Component {
-  state = { data: {}, errors: {} };
+  state = {
+    data: {},
+    errors: {},
+  };
 
   validate = () => {
     const options = { abortEarly: false };
@@ -12,13 +16,10 @@ class Form extends Component {
 
     const errors = {};
     for (let item of error.details) errors[item.path[0]] = item.message;
-    console.log("Errors in validate(): ", errors);
     return errors;
   };
 
   validateProperty = ({ name, value }) => {
-    //set name dynamically to validate later
-
     const obj = { [name]: value };
     const schema = { [name]: this.schema[name] };
     const { error } = Joi.validate(obj, schema);
@@ -43,6 +44,7 @@ class Form extends Component {
 
     const data = { ...this.state.data };
     data[input.name] = input.value;
+
     this.setState({ data, errors });
   };
 
@@ -51,6 +53,21 @@ class Form extends Component {
       <button disabled={this.validate()} className="btn btn-primary">
         {label}
       </button>
+    );
+  }
+
+  renderSelect(name, label, options) {
+    const { data, errors } = this.state;
+
+    return (
+      <Select
+        name={name}
+        value={data[name]}
+        label={label}
+        options={options}
+        onChange={this.handleChange}
+        error={errors[name]}
+      />
     );
   }
 
@@ -66,32 +83,6 @@ class Form extends Component {
         onChange={this.handleChange}
         error={errors[name]}
       />
-    );
-  }
-
-  renderDropDown(name, label, items) {
-    const { data, errors } = this.state;
-
-    return (
-      <select
-        defaultValue={"DEFAULT"}
-        className="custom-select"
-        id="inputGroupSelect"
-      >
-        <option value={"DEFAULT"} disabled>
-          Choose...
-        </option>
-        {items.map((i) => (
-          <option
-            error={errors[name]}
-            onChange={this.handleChange}
-            key={i._id}
-            value={data[i.name]}
-          >
-            {i.name}
-          </option>
-        ))}
-      </select>
     );
   }
 }
